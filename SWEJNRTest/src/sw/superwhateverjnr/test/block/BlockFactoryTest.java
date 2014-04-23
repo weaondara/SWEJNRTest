@@ -14,15 +14,18 @@ import junit.framework.TestCase;
 
 public class BlockFactoryTest extends TestCase
 {
-	public void testBlockFactory() throws Exception
+	private BlockFactory bf;
+	private World w;
+	public BlockFactoryTest() throws Exception
 	{
-		BlockFactory bf=BlockFactory.getInstance();
+		bf=BlockFactory.getInstance();
 		
 		Method m=WorldLoader.class.getDeclaredMethod("createWorld", String.class, int.class, int.class, Location.class, Block[][].class);
 		m.setAccessible(true);
-		World w=(World) m.invoke(new DummyWorldLoader(), "dummy", 10, 5, new Location(1, 1), new Block[10][5]);
-		
-		//invalid id -1
+		w=(World) m.invoke(new DummyWorldLoader(), "dummy", 10, 5, new Location(1, 1), new Block[10][5]);
+	}
+	public void testIDNegativ() throws Exception
+	{
 		try
 		{
 			bf.create(-1, 0, 0, w);
@@ -31,8 +34,9 @@ public class BlockFactoryTest extends TestCase
 		{
 			Assert.assertTrue(e instanceof IndexOutOfBoundsException);
 		}
-		
-		//invalid id 256
+	}
+	public void testIDOutOFBounds() throws Exception
+	{
 		try
 		{
 			bf.create(256, 0, 0, w);
@@ -41,8 +45,9 @@ public class BlockFactoryTest extends TestCase
 		{
 			Assert.assertTrue(e instanceof IndexOutOfBoundsException);
 		}
-		
-		//never supported id 255
+	}
+	public void testIDNeverSupported() throws Exception
+	{
 		try
 		{
 			bf.create(255, 0, 0, w);
@@ -52,7 +57,9 @@ public class BlockFactoryTest extends TestCase
 			Assert.assertTrue(e instanceof NullPointerException);
 		}
 		
-		//invalid x=10
+	}
+	public void testXOutOFBounds() throws Exception
+	{
 		try
 		{
 			bf.create(0, 10, 0, w);
@@ -62,7 +69,9 @@ public class BlockFactoryTest extends TestCase
 			Assert.assertTrue(e instanceof IndexOutOfBoundsException);
 		}
 		
-		//invalid y=5
+	}
+	public void testYOutOFBounds() throws Exception
+	{
 		try
 		{
 			bf.create(0, 0, 5, w);
@@ -72,6 +81,9 @@ public class BlockFactoryTest extends TestCase
 			Assert.assertTrue(e instanceof IndexOutOfBoundsException);
 		}
 		
+	}
+	public void testYOutOFBoundsClose() throws Exception
+	{
 		//invalid y=5
 		try
 		{
@@ -81,11 +93,14 @@ public class BlockFactoryTest extends TestCase
 		{
 			Assert.assertTrue(e instanceof IndexOutOfBoundsException);
 		}
-		
-		//valid 
+	}
+	public void testAir() throws Exception
+	{
 		Block b=bf.create(0, 0, 0, w);
 		assertTrue(b.getType()==Material.AIR);
-		
+	}
+	public void testStone() throws Exception
+	{
 		Block c=bf.create(1, 0, 0, w);
 		assertTrue(c.getType()==Material.STONE);
 	}
