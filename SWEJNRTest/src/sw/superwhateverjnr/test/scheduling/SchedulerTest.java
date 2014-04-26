@@ -1,4 +1,4 @@
-package sw.superwhateverjnr.test.block;
+package sw.superwhateverjnr.test.scheduling;
 
 import java.util.Map;
 
@@ -101,9 +101,6 @@ public class SchedulerTest extends TestCase
 		sched.cancelTask(t.getId());
 
 		Assert.assertTrue(t.getState()==State.Cancelled);
-		
-		System.out.println(t.getRunnable());
-		System.out.println(Scheduler.EMPTY);
 		
 		Assert.assertTrue(t.getRunnable()==Scheduler.EMPTY);
 		
