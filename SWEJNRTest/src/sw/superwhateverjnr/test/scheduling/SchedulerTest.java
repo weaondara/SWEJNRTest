@@ -52,7 +52,7 @@ public class SchedulerTest extends TestCase
 		
 		Assert.assertTrue(t.getState()==State.Pending);
 		
-		Thread.sleep(600);
+		Thread.sleep(800);
 		
 		Assert.assertTrue(t.getState()==State.Running);
 		
@@ -96,8 +96,6 @@ public class SchedulerTest extends TestCase
 
 		Assert.assertTrue(t.getState()==State.Pending);
 
-		System.out.println(t.getRunnable());
-		
 		sched.cancelTask(t.getId());
 
 		Assert.assertTrue(t.getState()==State.Cancelled);
@@ -106,8 +104,44 @@ public class SchedulerTest extends TestCase
 		
 		Assert.assertTrue(sched.getPendingTasks().get(t.getId())==null);
 	}
+	public void testTaskIds()
+	{
+		Runnable r=new Runnable()
+		{
+			@SneakyThrows
+			@Override
+			public void run() { Thread.sleep(2000);}
+		};
+		Task t1=sched.registerTask(r, 500);
+		Task t2=sched.registerTask(r, 500);
+		Task t3=sched.registerTask(r, 500);
+		
+		Assert.assertTrue(t1.getId()+1 == t2.getId());
+		Assert.assertTrue(t1.getId()+2 == t3.getId());
+	}
 	
-	
+	private int iterations=10;
+	private int count=0;
+	@SneakyThrows
+	public void testRepeating()
+	{
+		Runnable r=new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				if(count<iterations)
+				{
+					count++;
+				}
+			}
+		};
+		sched.registerRepeatingTask(r, 1, 100);
+		
+		Thread.sleep(1500);
+		
+		Assert.assertTrue(iterations==count);
+	}
 	
 	
 	
