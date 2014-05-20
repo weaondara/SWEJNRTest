@@ -10,9 +10,9 @@ public class EntityJumpCalcTest extends TestCase
 	{
 		player=new Player(null);
 	}
-	public void testJumpMaxWidth()
+	public void testJumpWidth()
 	{
-		assertTrue((""+player.getJumpMaxWidth()).equals("4.050899999999965"));
+		assertTrue((""+player.getJumpWidth(0)).equals("4.050899999999965"));
 	}
 	public void testJumpMaxHeight()
 	{
