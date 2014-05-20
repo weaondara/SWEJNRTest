@@ -12,12 +12,13 @@ public class EntityJumpCalcTest extends TestCase
 	}
 	public void testJumpWidth()
 	{
-		System.out.println(player.getJumpWidth(0));
-		assertTrue((""+player.getJumpWidth(0)).equals("4.050900000000412"));
+		double jw = player.getJumpWidth(0);
+		assertTrue((jw > 4.050) && (jw < 4.051));//"4.050900000000412"
 
 	}
 	public void testJumpMaxHeight()
 	{
-		assertTrue((""+player.getJumpMaxHeight()).equals("2.0254500000000237"));
+		double jh = player.getJumpMaxHeight();
+		assertTrue((jh > 2.025) && (jh < 2.026));//"2.0254500000000237"
 	}
 }
