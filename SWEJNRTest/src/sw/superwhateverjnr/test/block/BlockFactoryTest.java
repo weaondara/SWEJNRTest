@@ -28,7 +28,7 @@ public class BlockFactoryTest extends TestCase
 	{
 		try
 		{
-			bf.create(-1, 0, 0, w);
+			bf.create(-1, (byte)0, 0, 0, w, null);
 		}
 		catch(Exception e)
 		{
@@ -39,7 +39,7 @@ public class BlockFactoryTest extends TestCase
 	{
 		try
 		{
-			bf.create(256, 0, 0, w);
+			bf.create(256, (byte)0, 0, 0, w, null);
 		}
 		catch(Exception e)
 		{
@@ -50,7 +50,7 @@ public class BlockFactoryTest extends TestCase
 	{
 		try
 		{
-			bf.create(255, 0, 0, w);
+			bf.create(255, (byte)0, 0, 0, w, null);
 		}
 		catch(Exception e)
 		{
@@ -62,7 +62,7 @@ public class BlockFactoryTest extends TestCase
 	{
 		try
 		{
-			bf.create(0, 10, 0, w);
+			bf.create(0, (byte)0, 10, 0, w, null);
 		}
 		catch(Exception e)
 		{
@@ -74,7 +74,7 @@ public class BlockFactoryTest extends TestCase
 	{
 		try
 		{
-			bf.create(0, 0, 5, w);
+			bf.create(0, (byte)0, 0, 5, w, null);
 		}
 		catch(Exception e)
 		{
@@ -87,7 +87,7 @@ public class BlockFactoryTest extends TestCase
 		//invalid y=5
 		try
 		{
-			bf.create(0, 0, 5, w);
+			bf.create(0, (byte)0, 0, 5, w, null);
 		}
 		catch(Exception e)
 		{
@@ -96,12 +96,12 @@ public class BlockFactoryTest extends TestCase
 	}
 	public void testAir() throws Exception
 	{
-		Block b=bf.create(0, 0, 0, w);
+		Block b=bf.create(0, (byte)0, 0, 0, w, null);
 		assertTrue(b.getType()==Material.AIR);
 	}
 	public void testStone() throws Exception
 	{
-		Block c=bf.create(1, 0, 0, w);
+		Block c=bf.create(1, (byte)0, 0, 0, w, null);
 		assertTrue(c.getType()==Material.STONE);
 	}
 }
