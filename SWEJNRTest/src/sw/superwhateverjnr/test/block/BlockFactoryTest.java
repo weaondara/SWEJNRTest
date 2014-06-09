@@ -1,10 +1,13 @@
 package sw.superwhateverjnr.test.block;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import sw.superwhateverjnr.block.Block;
 import sw.superwhateverjnr.block.BlockFactory;
 import sw.superwhateverjnr.block.Material;
+import sw.superwhateverjnr.entity.Entity;
 import sw.superwhateverjnr.world.DummyWorldLoader;
 import sw.superwhateverjnr.world.Location;
 import sw.superwhateverjnr.world.World;
@@ -20,9 +23,9 @@ public class BlockFactoryTest extends TestCase
 	{
 		bf=BlockFactory.getInstance();
 		
-		Method m=WorldLoader.class.getDeclaredMethod("createWorld", String.class, int.class, int.class, Location.class, Block[][].class);
+		Method m=WorldLoader.class.getDeclaredMethod("createWorld", String.class, int.class, int.class, Location.class, Block[][].class, List.class);
 		m.setAccessible(true);
-		w=(World) m.invoke(new DummyWorldLoader(), "dummy", 10, 5, new Location(1, 1), new Block[10][5]);
+		w=(World) m.invoke(new DummyWorldLoader(), "dummy", 10, 5, new Location(1, 1), new Block[10][5], new ArrayList<Entity>());
 	}
 	public void testIDNegativ() throws Exception
 	{
