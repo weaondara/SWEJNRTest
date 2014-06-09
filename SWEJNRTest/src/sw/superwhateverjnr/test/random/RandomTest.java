@@ -12,39 +12,39 @@ import junit.framework.TestCase;
 
 public class RandomTest extends TestCase
 {
-        private RandomMaterialGetter mg;
-        private RandomMobGetter mobg;
-        public RandomTest()
+    private RandomMaterialGetter mg;
+    private RandomMobGetter mobg;
+    public RandomTest()
+    {
+        mg = new RandomMaterialGetter(1337);
+        mobg = new RandomMobGetter(1337);
+    }
+    public void testMaterial()
+    {
+        for(int i = 0; i < 10; i++)
         {
-                mg = new RandomMaterialGetter(1337);
-                mobg = new RandomMobGetter(1337);
+            assertTrue(mg.nextSurface() != null);
+            assertTrue(mg.nextFilling() != null);
         }
-        public void materialTest()
+    }
+    public void testEntity()
+    {
+        for(int i = 0; i < 10; i++)
         {
-                for(int i = 0; i < 10; i++)
-                {
-                        assertTrue(mg.nextSurface() != null);
-                        assertTrue(mg.nextFilling() != null);
-                }
+            assertTrue(mobg.nextMob() != null);
         }
-        public void entityTest()
+    }
+    public void testLittleWorld()
+    {
+        try
         {
-                for(int i = 0; i < 10; i++)
-                {
-                        assertTrue(mobg.nextMob() != null);
-                }
+            RandomWorldGenerator rwg = new RandomWorldGenerator(20, 30, 20, 30);
+            World w = rwg.newWorld(1337); // Magic!
+            assertTrue(w != null);
         }
-        public void littleWorldTest()
+        catch(Exception e)
         {
-                try
-                {
-                        RandomWorldGenerator rwg = new RandomWorldGenerator(20, 30, 20, 30);
-                        World w = rwg.newWorld(1337); // Magic!
-                        assertTrue(w != null);
-                }
-                catch(Exception e)
-                {
-                        assertTrue(false);
-                }
+            assertTrue(false);
         }
+    }
 }
