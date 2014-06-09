@@ -5,6 +5,7 @@ import java.io.InputStream;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import sw.superwhateverjnr.SWEJNR;
+import sw.superwhateverjnr.texture.BlockTexture;
 import sw.superwhateverjnr.texture.DummyTextureLoader;
 import sw.superwhateverjnr.texture.Texture;
 import sw.superwhateverjnr.util.IdAndSubId;
@@ -22,7 +23,7 @@ public class DummyTextureLoaderTest extends TestCase
 		
 		InputStream isstone=SWEJNR.getInstance().getResources().getAssets().open("dummy/textures/blocks/stone.png");
 		Bitmap bmstone=BitmapFactory.decodeStream(isstone);
-		Texture texstone=new Texture(idstone,bmstone.getWidth(),bmstone.getHeight(),bmstone);
+		Texture texstone=new BlockTexture(idstone,bmstone.getWidth(),bmstone.getHeight(),bmstone);
 		
 		Assert.assertEquals(texstone, tex);
 	}
@@ -35,7 +36,7 @@ public class DummyTextureLoaderTest extends TestCase
 		
 		InputStream iserror=SWEJNR.getInstance().getResources().getAssets().open("dummy/textures/error.png");
 		Bitmap bmerror=BitmapFactory.decodeStream(iserror);
-		Texture texerror=new Texture(idsomethingelse,bmerror.getWidth(),bmerror.getHeight(),bmerror);
+		Texture texerror=new BlockTexture(idsomethingelse,bmerror.getWidth(),bmerror.getHeight(),bmerror);
 		
 		Assert.assertEquals(texerror, tex);
 	}
