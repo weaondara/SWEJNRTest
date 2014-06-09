@@ -38,7 +38,7 @@ public class RandomTest extends TestCase
         {
                 try
                 {
-                        RandomWorldGenerator rwg = new RandomWorldGenerator(20, 30, 20, 30)
+                        RandomWorldGenerator rwg = new RandomWorldGenerator(20, 30, 20, 30);
                         World w = rwg.newWorld(1337); // Magic!
                         assertTrue(w != null);
                 }
