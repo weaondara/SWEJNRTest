@@ -23,9 +23,9 @@ public class BlockFactoryTest extends TestCase
 	{
 		bf=BlockFactory.getInstance();
 		
-		Method m=WorldLoader.class.getDeclaredMethod("createWorld", String.class, int.class, int.class, Location.class, Block[][].class, List.class);
+		Method m=WorldLoader.class.getDeclaredMethod("createWorld", String.class, int.class, int.class, Location.class, Location.class, Block[][].class, List.class, long.class);
 		m.setAccessible(true);
-		w=(World) m.invoke(new DummyWorldLoader(), "dummy", 10, 5, new Location(1, 1), new Block[10][5], new ArrayList<Entity>());
+		w=(World) m.invoke(new DummyWorldLoader(), "dummy", 10, 5, new Location(1, 1), new Location(2, 1), new Block[10][5], new ArrayList<Entity>(),10000000);
 	}
 	public void testIDNegativ() throws Exception
 	{
